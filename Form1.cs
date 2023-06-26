@@ -1,23 +1,38 @@
+using System.Data.Common;
+
 namespace FileReaderCS
 {
     public partial class Form1 : Form
     {
 
-        private String filename;
+        private readonly string[] columnNames = { "CIV_LIBELLE", "NOM", "PRENOM", "CP", "VILLE" };
+        private string filePath = "";
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void selectButton_Click(object sender, EventArgs e)
+        private void SelectButton_Click(object sender, EventArgs e)
         {
+            // Select file
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "CSV files (*.csv)|*.csv";
-            if (fileDialog.ShowDialog() == DialogResult.OK) { 
-                filename = fileDialog.FileName; 
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            { 
+                filePath = fileDialog.FileName; 
             }
 
+            // Read file
+            StreamReader sr = new StreamReader(filePath);
+            string? line = sr.ReadLine();
+            char separator = line[columnNames[0].Length];
+            List<Client> clients = new List<Client>();
+            while ((line = sr.ReadLine()) is not null)
+            {
+                clients.Add(new Client(line, separator));
+            }
+            sr.Close();
         }
 
     }

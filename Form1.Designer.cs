@@ -39,7 +39,7 @@
             selectButton.TabIndex = 0;
             selectButton.Text = "Sélectionner un fichier";
             selectButton.UseVisualStyleBackColor = true;
-            selectButton.Click += selectButton_Click;
+            selectButton.Click += SelectButton_Click;
             // 
             // Form1
             // 

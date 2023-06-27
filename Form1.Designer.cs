@@ -29,23 +29,35 @@
         private void InitializeComponent()
         {
             selectButton = new Button();
+            saveButton = new Button();
             SuspendLayout();
             // 
             // selectButton
             // 
             selectButton.Location = new Point(38, 21);
-            selectButton.Name = "button1";
+            selectButton.Name = "selectButton";
             selectButton.Size = new Size(150, 23);
             selectButton.TabIndex = 0;
             selectButton.Text = "Sélectionner un fichier";
             selectButton.UseVisualStyleBackColor = true;
             selectButton.Click += SelectButton_Click;
             // 
+            // saveButton
+            // 
+            saveButton.Location = new Point(211, 22);
+            saveButton.Name = "saveButton";
+            saveButton.Size = new Size(150, 23);
+            saveButton.TabIndex = 1;
+            saveButton.Text = "Enregistrer";
+            saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(saveButton);
             Controls.Add(selectButton);
             Name = "Form1";
             Text = "Form1";
@@ -55,5 +67,6 @@
         #endregion
 
         private Button selectButton;
+        private Button saveButton;
     }
 }

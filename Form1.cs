@@ -6,7 +6,7 @@ namespace FileReaderCS
     {
 
         private string filePath = "";
-        private List<Client> clients = new List<Client>();
+        private List<Person> clients = new List<Person>();
         private string[] columnNames = new string[5];
 
         public Form1()
@@ -18,6 +18,11 @@ namespace FileReaderCS
         {
             SelectFile();
             ReadFile();
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         // Open a file dialog and register the file selected by the user
@@ -38,10 +43,10 @@ namespace FileReaderCS
             string? line = sr.ReadLine();
             char separator = line.TrimStart("ABCDEFGHIJKLMNOPQRSTUVWXYZ_".ToCharArray())[0];
             columnNames = line.Split(separator);
-            clients = new List<Client>();
+            clients = new List<Person>();
             while ((line = sr.ReadLine()) is not null)
             {
-                clients.Add(new Client(line, separator, columnNames));
+                clients.Add(new Person(line, separator, columnNames));
             }
             sr.Close();
         }

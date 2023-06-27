@@ -16,6 +16,21 @@ namespace FileReaderCS
             firstName = GetFieldValue(entry, columnOrder, 2);
             postalCode = GetFieldValue(entry, columnOrder, 3);
             town = GetFieldValue(entry, columnOrder, 4);
+
+            // Standardize data
+            string upperTitle = title.ToUpper();
+            if (upperTitle.Equals("MR"))
+            {
+                title = "MR";
+            }
+            else if (upperTitle.Equals("MME"))
+            {
+                title = "Mme";
+            }
+            lastName = lastName.ToUpper();
+            firstName = firstName.ToUpper();
+            town = town.ToUpper();
+            postalCode = postalCode.PadLeft(5, '0');
         }
 
         /*
@@ -36,7 +51,7 @@ namespace FileReaderCS
             }
             else
             {
-                return entry[columnOrder[columnNames[i]]];
+                return entry[columnOrder[columnNames[i]]].Trim();
             }
         }
 

@@ -6,16 +6,17 @@ namespace FileReaderCS
     {
 
         internal readonly string title, lastName, firstName, postalCode, town = "";
-        internal static readonly string[] columnNames = { "CIV_LIBELLE", "NOM", "PRENOM", "CP", "VILLE" };
+        internal static readonly string[] columnNamesDefault = 
+            { "CIV_LIBELLE", "NOM", "PRENOM", "CP", "VILLE" };
 
-        public Client(string csvLine, char separator, Dictionary<string, int> columnOrder)
+        public Client(string csvLine, char separator, string[] columnNames)
         {
             string[] entry = csvLine.Split(separator);
-            title = GetFieldValue(entry, columnOrder, 0);
-            lastName = GetFieldValue(entry, columnOrder, 1);
-            firstName = GetFieldValue(entry, columnOrder, 2);
-            postalCode = GetFieldValue(entry, columnOrder, 3);
-            town = GetFieldValue(entry, columnOrder, 4);
+            title = GetFieldValue(entry, columnNames, 0);
+            lastName = GetFieldValue(entry, columnNames, 1);
+            firstName = GetFieldValue(entry, columnNames, 2);
+            postalCode = GetFieldValue(entry, columnNames, 3);
+            town = GetFieldValue(entry, columnNames, 4);
 
             // Standardize data
             string upperTitle = title.ToUpper();
@@ -39,11 +40,11 @@ namespace FileReaderCS
          * Parameters :
          *      entry : The entry informations as a string array (possibly not in the default 
          *              column order)
-         *      columnOrder : the order in which the informations are presented in the entry, as
-         *              a dictionary that associates the column name with its postion
+         *      columnNames : the order in which the informations are presented in the entry, as
+         *              a string array
          *      i : the index of the field whose value is to be returned
          */
-        private string GetFieldValue(string[] entry, Dictionary<string, int> columnOrder, int i)
+        private string GetFieldValue(string[] entry, string[] columnNames, int i)
         {
             if (entry.Length < i)
             {
@@ -51,7 +52,7 @@ namespace FileReaderCS
             }
             else
             {
-                return entry[columnOrder[columnNames[i]]].Trim();
+                return entry[Array.IndexOf(columnNames, columnNamesDefault[i])];
             }
         }
 

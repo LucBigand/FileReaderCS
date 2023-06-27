@@ -4,6 +4,7 @@
     {
 
         private string title, lastName, firstName, postalCode, town;
+        internal static readonly string[] columnNames = { "CIV_LIBELLE", "NOM", "PRENOM", "CP", "VILLE" };
 
         public Client(string csvLine) : this(csvLine, ';') { }
 

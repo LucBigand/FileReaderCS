@@ -5,7 +5,6 @@ namespace FileReaderCS
     public partial class Form1 : Form
     {
 
-        private readonly string[] columnNames = { "CIV_LIBELLE", "NOM", "PRENOM", "CP", "VILLE" };
         private string filePath = "";
         private List<Client> clients = new List<Client>();
 
@@ -27,7 +26,7 @@ namespace FileReaderCS
             // Read file
             StreamReader sr = new StreamReader(filePath);
             string? line = sr.ReadLine();
-            char separator = line[columnNames[0].Length];
+            char separator = line[Client.columnNames[0].Length];
             while ((line = sr.ReadLine()) is not null)
             {
                 clients.Add(new Client(line, separator));

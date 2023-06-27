@@ -5,7 +5,7 @@ namespace FileReaderCS
     internal class Person
     {
 
-        internal Dictionary<string, string> data;
+        private Dictionary<string, string> data;
         internal static readonly string[] columnNamesDefault = 
             { "CIV_LIBELLE", "NOM", "PRENOM", "CP", "VILLE" };
 
@@ -19,6 +19,10 @@ namespace FileReaderCS
             }
 
             // Standardize data
+            foreach (string fieldName in columnNamesDefault)
+            {
+                data[fieldName] = data[fieldName].Trim();
+            }
             string upperTitle = data["CIV_LIBELLE"].ToUpper();
             if (upperTitle.Equals("MR"))
             {
@@ -34,14 +38,27 @@ namespace FileReaderCS
             data["CP"] = data["CP"].PadLeft(5, '0');
         }
 
-        public string getFieldValue(string fieldName)
+        // Return the value for the field given as parameter
+        public string GetFieldValue(string fieldName)
         {
             return data[fieldName];
         }
 
-        public string ToCSVLine(char separator, string[] columnNames)
+        public string ToCSVLine(string[] columnNames)
         {
-            return "";
+            return ToCSVLine(columnNames, ';');
+        }
+
+        /* Convert this Person's data into a CSV line
+         * Parameters :
+         *      columnNames : A string array with the field names in order of their appearance
+         *              in the CSV line
+         *      separator : The separator to be used in the CSV line
+         */
+        public string ToCSVLine(string[] columnNames, char separator)
+        {
+            return String.Join(
+                separator, columnNames.Select(fieldName => GetFieldValue(fieldName)));
         }
 
         /*

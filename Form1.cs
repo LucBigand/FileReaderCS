@@ -6,7 +6,8 @@ namespace FileReaderCS
     {
 
         private string filePath = "";
-        private List<Person> clients = new List<Person>();
+        private string directoryPath = "";
+        private List<Person> persons = new List<Person>();
         private string[] columnNames = new string[5];
 
         public Form1()
@@ -22,7 +23,8 @@ namespace FileReaderCS
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            SelectDirectory();
+            SaveFile();
         }
 
         // Open a file dialog and register the file selected by the user
@@ -43,12 +45,35 @@ namespace FileReaderCS
             string? line = sr.ReadLine();
             char separator = line.TrimStart("ABCDEFGHIJKLMNOPQRSTUVWXYZ_".ToCharArray())[0];
             columnNames = line.Split(separator);
-            clients = new List<Person>();
+            persons = new List<Person>();
             while ((line = sr.ReadLine()) is not null)
             {
-                clients.Add(new Person(line, separator, columnNames));
+                persons.Add(new Person(line, separator, columnNames));
             }
             sr.Close();
+        }
+
+        // Write the data in a new file in the registered directory
+        private void SaveFile()
+        {
+            StreamWriter sw = new StreamWriter(
+                Path.Combine(directoryPath, Path.GetFileName(filePath)));
+            sw.WriteLine(String.Join(";", columnNames));
+            foreach (Person person in persons)
+            {
+                sw.WriteLine(person.ToCSVLine(columnNames));
+            }
+            sw.Close();
+        }
+
+        // Open a browser dialog and select the directory selected by the user
+        private void SelectDirectory()
+        {
+            FolderBrowserDialog browserDialog = new FolderBrowserDialog();
+            if (browserDialog.ShowDialog() == DialogResult.OK)
+            {
+                directoryPath = browserDialog.SelectedPath;
+            }
         }
 
     }

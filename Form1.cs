@@ -15,15 +15,24 @@ namespace FileReaderCS
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            // Select file
+            SelectFile();
+            ReadFile();
+        }
+
+        // Open a file dialog and register the file selected by the user
+        private void SelectFile()
+        {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "CSV files (*.csv)|*.csv";
             if (fileDialog.ShowDialog() == DialogResult.OK)
-            { 
-                filePath = fileDialog.FileName; 
+            {
+                filePath = fileDialog.FileName;
             }
+        }
 
-            // Read file
+        // Read the registered file and saves its data in the form of a list of Clients
+        private void ReadFile()
+        {
             StreamReader sr = new StreamReader(filePath);
             string? line = sr.ReadLine();
             char separator = line[Client.columnNames[0].Length];

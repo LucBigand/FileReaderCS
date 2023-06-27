@@ -8,6 +8,9 @@ namespace FileReaderCS
         private string filePath = "";
         private List<Client> clients = new List<Client>();
 
+        // Associate to each column name in the .csv file its position
+        private Dictionary<string, int> columnOrder = new Dictionary<string, int>();
+
         public Form1()
         {
             InitializeComponent();
@@ -35,10 +38,15 @@ namespace FileReaderCS
         {
             StreamReader sr = new StreamReader(filePath);
             string? line = sr.ReadLine();
-            char separator = line[Client.columnNames[0].Length];
+            char separator = line.TrimStart("ABCDEFGHIJKLMNOPQRSTUVWXYZ_".ToCharArray())[0];
+            string[] columnNames = line.Split(separator);
+            for (int i = 0; i <  columnNames.Length; i++)
+            {
+                columnOrder.Add(columnNames[i], i);
+            }
             while ((line = sr.ReadLine()) is not null)
             {
-                clients.Add(new Client(line, separator));
+                clients.Add(new Client(line, separator, columnOrder));
             }
             sr.Close();
         }

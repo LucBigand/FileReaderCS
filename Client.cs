@@ -6,16 +6,14 @@
         private string title, lastName, firstName, postalCode, town;
         internal static readonly string[] columnNames = { "CIV_LIBELLE", "NOM", "PRENOM", "CP", "VILLE" };
 
-        public Client(string csvLine) : this(csvLine, ';') { }
-
-        public Client(string csvLine, char separator)
+        public Client(string csvLine, char separator, Dictionary<string, int> columnOrder)
         {
             string[] data = csvLine.Split(separator);
-            title = data[0];
-            lastName = data[1];
-            firstName = data[2];
-            postalCode = data[3];
-            town = data[4];
+            title = data[columnOrder[columnNames[0]]];
+            lastName = data[columnOrder[columnNames[1]]];
+            firstName = data[columnOrder[columnNames[2]]];
+            postalCode = data[columnOrder[columnNames[3]]];
+            town = data[columnOrder[columnNames[4]]];
         }
 
         public string getTitle()

@@ -24,7 +24,7 @@ namespace FileReaderCS
         private void SaveButton_Click(object sender, EventArgs e)
         {
             SelectDirectory();
-            SaveFile();
+            SaveFile2();
         }
 
         // Open a file dialog and register the file selected by the user
@@ -53,7 +53,7 @@ namespace FileReaderCS
             sr.Close();
         }
 
-        // Write the data in a new file in the registered directory
+        // Write the data in a new file in the selected directory
         private void SaveFile()
         {
             StreamWriter sw = new StreamWriter(
@@ -64,6 +64,36 @@ namespace FileReaderCS
                 sw.WriteLine(person.ToCSVLine(columnNames));
             }
             sw.Close();
+        }
+
+        /* Writes the data in two separated files (one for men and one for women) in the selected
+         * directory. The columns "NOM" and "PRENOM" are inverted for men, and "CP" and "VILLE" are
+         * inverted for women
+         */
+        private void SaveFile2()
+        {
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(filePath);
+            StreamWriter swMen = new StreamWriter(
+                Path.Combine(directoryPath, fileNameNoExtension + "-hommes.csv"));
+            StreamWriter swWomen = new StreamWriter(
+                Path.Combine(directoryPath, fileNameNoExtension + "-femmes.csv"));
+            string[] columnNamesMen = Utils.Permutate(columnNames, "NOM", "PRENOM");
+            string[] columnNamesWomen = Utils.Permutate(columnNames, "CP", "VILLE");
+            swMen.WriteLine(String.Join(";", columnNamesMen));
+            swWomen.WriteLine(String.Join(";", columnNamesWomen));
+            foreach (Person person in persons)
+            {
+                if (person.GetFieldValue("CIV_LIBELLE").Equals("MR"))
+                {
+                    swMen.WriteLine(person.ToCSVLine(columnNamesMen));
+                }
+                else if (person.GetFieldValue("CIV_LIBELLE").Equals("Mme"))
+                {
+                    swWomen.WriteLine(person.ToCSVLine(columnNamesWomen));
+                }
+            }
+            swMen.Close();
+            swWomen.Close();
         }
 
         // Open a browser dialog and select the directory selected by the user

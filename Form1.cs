@@ -124,6 +124,7 @@ namespace FileReaderCS
         // Load the data into the data grid
         private void DisplayData()
         {
+            personsDataGrid.Rows.Clear();
             foreach (Person person in persons)
             {
                 int index = personsDataGrid.Rows.Add();

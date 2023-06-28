@@ -9,8 +9,6 @@ namespace FileReaderCS
         private string directoryPath = "";
         private List<Person> persons = new List<Person>();
         private string[] columnNames = new string[5];
-        private Dictionary<string, DataGridViewTextBoxColumn> personsDataGridColumns
-                    = new Dictionary<string, DataGridViewTextBoxColumn>();
 
         public Form1()
         {
@@ -22,6 +20,7 @@ namespace FileReaderCS
         {
             SelectFile();
             ReadFile();
+            DisplayData();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -111,7 +110,6 @@ namespace FileReaderCS
 
         private void InitializeDataGridPersons()
         {
-            personsDataGridColumns = new Dictionary<string, DataGridViewTextBoxColumn>();
             foreach (string fieldName in Person.columnNamesDefault)
             {
                 DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
@@ -119,7 +117,19 @@ namespace FileReaderCS
                 column.HeaderText = fieldName;
                 column.ReadOnly = true;
                 personsDataGrid.Columns.Add(column);
-                personsDataGridColumns.Add(fieldName, column);
+            }
+        }
+
+        private void DisplayData()
+        {
+            foreach (Person person in persons)
+            {
+                int index = personsDataGrid.Rows.Add();
+                foreach (string fieldName in Person.columnNamesDefault)
+                {
+                    personsDataGrid.Rows[index].Cells[fieldName].Value =
+                            person.GetFieldValue(fieldName);
+                }
             }
         }
 

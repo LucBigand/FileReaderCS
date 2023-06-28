@@ -36,7 +36,7 @@
             // 
             // selectButton
             // 
-            selectButton.Location = new Point(38, 21);
+            selectButton.Location = new Point(12, 12);
             selectButton.Name = "selectButton";
             selectButton.Size = new Size(150, 23);
             selectButton.TabIndex = 0;
@@ -46,7 +46,7 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(211, 22);
+            saveButton.Location = new Point(168, 12);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(150, 23);
             saveButton.TabIndex = 1;
@@ -57,10 +57,10 @@
             // personsDataGrid
             // 
             personsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            personsDataGrid.Location = new Point(40, 65);
+            personsDataGrid.Location = new Point(12, 41);
             personsDataGrid.Name = "personsDataGrid";
             personsDataGrid.RowTemplate.Height = 25;
-            personsDataGrid.Size = new Size(240, 150);
+            personsDataGrid.Size = new Size(776, 397);
             personsDataGrid.TabIndex = 2;
             // 
             // Form1

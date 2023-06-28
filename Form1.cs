@@ -108,6 +108,7 @@ namespace FileReaderCS
             }
         }
 
+        // Sets the columns of the data grid
         private void InitializeDataGridPersons()
         {
             foreach (string fieldName in Person.columnNamesDefault)
@@ -120,6 +121,7 @@ namespace FileReaderCS
             }
         }
 
+        // Load the data into the data grid
         private void DisplayData()
         {
             foreach (Person person in persons)

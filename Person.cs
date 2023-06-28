@@ -24,8 +24,11 @@ namespace FileReaderCS
                     data.Add(columnName, string.Empty);
                 }
             }
+            StandardizeData();
+        }
 
-            // Standardize data
+        private void StandardizeData()
+        {
             foreach (string fieldName in columnNamesDefault)
             {
                 data[fieldName] = data[fieldName].Trim();

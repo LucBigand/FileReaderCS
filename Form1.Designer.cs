@@ -30,6 +30,8 @@
         {
             selectButton = new Button();
             saveButton = new Button();
+            personsDataGrid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)personsDataGrid).BeginInit();
             SuspendLayout();
             // 
             // selectButton
@@ -52,15 +54,26 @@
             saveButton.UseVisualStyleBackColor = true;
             saveButton.Click += SaveButton_Click;
             // 
+            // personsDataGrid
+            // 
+            personsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            personsDataGrid.Location = new Point(40, 65);
+            personsDataGrid.Name = "personsDataGrid";
+            personsDataGrid.RowTemplate.Height = 25;
+            personsDataGrid.Size = new Size(240, 150);
+            personsDataGrid.TabIndex = 2;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(personsDataGrid);
             Controls.Add(saveButton);
             Controls.Add(selectButton);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)personsDataGrid).EndInit();
             ResumeLayout(false);
         }
 
@@ -68,5 +81,6 @@
 
         private Button selectButton;
         private Button saveButton;
+        private DataGridView personsDataGrid;
     }
 }

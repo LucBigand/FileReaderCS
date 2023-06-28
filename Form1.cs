@@ -9,10 +9,13 @@ namespace FileReaderCS
         private string directoryPath = "";
         private List<Person> persons = new List<Person>();
         private string[] columnNames = new string[5];
+        private Dictionary<string, DataGridViewTextBoxColumn> personsDataGridColumns
+                    = new Dictionary<string, DataGridViewTextBoxColumn>();
 
         public Form1()
         {
             InitializeComponent();
+            InitializeDataGridPersons();
         }
 
         private void SelectButton_Click(object sender, EventArgs e)
@@ -103,6 +106,20 @@ namespace FileReaderCS
             if (browserDialog.ShowDialog() == DialogResult.OK)
             {
                 directoryPath = browserDialog.SelectedPath;
+            }
+        }
+
+        private void InitializeDataGridPersons()
+        {
+            personsDataGridColumns = new Dictionary<string, DataGridViewTextBoxColumn>();
+            foreach (string fieldName in Person.columnNamesDefault)
+            {
+                DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+                column.Name = fieldName;
+                column.HeaderText = fieldName;
+                column.ReadOnly = true;
+                personsDataGrid.Columns.Add(column);
+                personsDataGridColumns.Add(fieldName, column);
             }
         }
 

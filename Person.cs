@@ -13,9 +13,16 @@ namespace FileReaderCS
         {
             string[] entry = csvLine.Split(separator);
             data = new Dictionary<string, string>();
-            for (int i = 0; i < entry.Length && i < columnNamesDefault.Length; i++)
+            for (int i = 0; i < entry.Length && i < columnNames.Length; i++)
             {
-                data.Add(columnNamesDefault[i], GetValueFromArray(entry, columnNames, i));
+                data.Add(columnNames[i], entry[i]);
+            }
+            foreach (string columnName in columnNamesDefault)
+            {
+                if (!data.ContainsKey(columnName))
+                {
+                    data.Add(columnName, string.Empty);
+                }
             }
 
             // Standardize data
@@ -59,28 +66,6 @@ namespace FileReaderCS
         {
             return String.Join(
                 separator, columnNames.Select(fieldName => GetFieldValue(fieldName)));
-        }
-
-        /*
-         * Return from the entry the value of what would be the field of index i in the default
-         * column order as defined in columnNames
-         * Parameters :
-         *      entry : The entry informations as a string array (possibly not in the default 
-         *              column order)
-         *      columnNames : the order in which the informations are presented in the entry, as
-         *              a string array
-         *      i : the index of the field whose value is to be returned
-         */
-        private static string GetValueFromArray(string[] entry, string[] columnNames, int i)
-        {
-            if (entry.Length < i)
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return entry[Array.IndexOf(columnNames, columnNamesDefault[i])];
-            }
         }
 
     }

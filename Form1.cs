@@ -38,6 +38,7 @@ namespace FileReaderCS
             {
                 filePath = fileDialog.FileName;
             }
+            fileLabel.Text = "Fichier sélectionné : " + filePath;
         }
 
         // Read the registered file and saves its data in the form of a list of Clients

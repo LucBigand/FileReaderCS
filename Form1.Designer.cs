@@ -31,6 +31,7 @@
             selectButton = new Button();
             saveButton = new Button();
             personsDataGrid = new DataGridView();
+            fileLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)personsDataGrid).BeginInit();
             SuspendLayout();
             // 
@@ -57,17 +58,27 @@
             // personsDataGrid
             // 
             personsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            personsDataGrid.Location = new Point(12, 41);
+            personsDataGrid.Location = new Point(12, 56);
             personsDataGrid.Name = "personsDataGrid";
             personsDataGrid.RowTemplate.Height = 25;
-            personsDataGrid.Size = new Size(776, 397);
+            personsDataGrid.Size = new Size(776, 382);
             personsDataGrid.TabIndex = 2;
+            // 
+            // fileLabel
+            // 
+            fileLabel.AutoSize = true;
+            fileLabel.Location = new Point(12, 38);
+            fileLabel.Name = "fileLabel";
+            fileLabel.Size = new Size(85, 15);
+            fileLabel.TabIndex = 3;
+            fileLabel.Text = "Pas de fichier sélectionné";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(fileLabel);
             Controls.Add(personsDataGrid);
             Controls.Add(saveButton);
             Controls.Add(selectButton);
@@ -75,6 +86,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)personsDataGrid).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -82,5 +94,6 @@
         private Button selectButton;
         private Button saveButton;
         private DataGridView personsDataGrid;
+        private Label fileLabel;
     }
 }

@@ -57,9 +57,12 @@
             // 
             // personsDataGrid
             // 
+            personsDataGrid.AllowUserToAddRows = false;
+            personsDataGrid.AllowUserToDeleteRows = false;
             personsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             personsDataGrid.Location = new Point(12, 56);
             personsDataGrid.Name = "personsDataGrid";
+            personsDataGrid.ReadOnly = true;
             personsDataGrid.RowTemplate.Height = 25;
             personsDataGrid.Size = new Size(776, 382);
             personsDataGrid.TabIndex = 2;
@@ -69,7 +72,7 @@
             fileLabel.AutoSize = true;
             fileLabel.Location = new Point(12, 38);
             fileLabel.Name = "fileLabel";
-            fileLabel.Size = new Size(85, 15);
+            fileLabel.Size = new Size(140, 15);
             fileLabel.TabIndex = 3;
             fileLabel.Text = "Pas de fichier sélectionné";
             // 
@@ -83,7 +86,7 @@
             Controls.Add(saveButton);
             Controls.Add(selectButton);
             Name = "Form1";
-            Text = "Form1";
+            Text = "File reader";
             ((System.ComponentModel.ISupportInitialize)personsDataGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();

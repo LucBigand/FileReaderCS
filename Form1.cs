@@ -1,5 +1,3 @@
-using System.Data.Common;
-
 namespace FileReaderCS
 {
     public partial class Form1 : Form
@@ -48,6 +46,8 @@ namespace FileReaderCS
             string? line = sr.ReadLine();
             char separator = line.TrimStart("ABCDEFGHIJKLMNOPQRSTUVWXYZ_".ToCharArray())[0];
             columnNames = line.Split(separator);
+            columnNames = columnNames.Concat(
+                    Person.columnNamesDefault.Except(columnNames)).ToArray();
             persons = new List<Person>();
             while ((line = sr.ReadLine()) is not null)
             {

@@ -1,6 +1,4 @@
-﻿using System.Drawing.Text;
-
-namespace FileReaderCS
+﻿namespace FileReaderCS
 {
     internal class Person
     {
